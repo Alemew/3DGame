@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LineSight : MonoBehaviour
@@ -43,16 +44,59 @@ public class LineSight : MonoBehaviour
             return false;
         }
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private bool ClearLineOfSight()
     {
-        
+        Vector3 directionToTheTargetNormalized = (target.position - eyePoint.position).normalized;
+
+        RaycastHit raycastInfo;
+
+        if (Physics.Raycast(eyePoint.position, directionToTheTargetNormalized,out raycastInfo, theCollider.radius))
+        {
+            if (raycastInfo.transform.CompareTag("Player"))
+            {
+                return true;
+            } 
+        }
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateSight()
     {
-        
+        switch (sensitivity)
+        {
+            case SighSensitivity.STRICT:
+            {
+                canSeeTarget = InFieldOfView() && ClearLineOfSight();
+                break;
+            }
+            case SighSensitivity.LOOSE:
+            {
+                canSeeTarget = InFieldOfView() || ClearLineOfSight();
+                break;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            UpdateSight();
+
+            if (canSeeTarget)
+            {
+                lastKnowSight = target.position;
+            }
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canSeeTarget = false;
+        }
     }
 }
