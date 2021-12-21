@@ -12,7 +12,8 @@ public class AIEnemy : MonoBehaviour
         ATTACK
     }
 
-    [SerializeField] private EnemyState _currentState = EnemyState.PATROL;
+    [SerializeField] 
+    private EnemyState _currentState = EnemyState.PATROL;
 
     public IEnumerator AIPatrol()
     {
