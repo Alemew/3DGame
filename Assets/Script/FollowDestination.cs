@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class FollowDestination : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class FollowDestination : MonoBehaviour
     {
         theAgent = GetComponent<NavMeshAgent>();
     }
+
+    private void Start()
+    {
+        GameObject[] randomDestinations = GameObject.FindGameObjectsWithTag("Destination");
+        destination = randomDestinations[Random.Range(0, randomDestinations.Length)].GetComponent<Transform>();
+    }
+
 
     // Update is called once per frame
     void Update()

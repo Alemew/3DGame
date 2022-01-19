@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentGameState = GameState.menu;
-        GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
+        //GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
     }
 
     void ChangeStateGame(GameState newGameState)
@@ -62,12 +62,12 @@ public class GameManager : MonoBehaviour
         if (newGameState == GameState.menu)
         {
             currentGameState = GameState.menu;
-            GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
+            //GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
 
         }
         else if (newGameState == GameState.inTheGame)
         {
-            GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = true;
+            //GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = true;
             Debug.Log("Comienzo");
             currentGameState = GameState.inTheGame;
             Timer.sharedInstance.StartTimer();
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         else
         {
             currentGameState = GameState.gameOver;
-            GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
+            //GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = false;
             if (Timer.sharedInstance.startCountDowm)
             {
                 Timer.sharedInstance.startCountDowm = false;

@@ -23,6 +23,11 @@ public class Timer : MonoBehaviour
         startCountDowm = true;
     }
 
+    public void moreTime()
+    {
+        countdown += 30;
+    }
+
     // Update is called once per frame
     void Update()
     {
