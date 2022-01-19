@@ -262,5 +262,28 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+        
+        public void OnCollisionEnter(Collision other)
+        {
+            Debug.Log("contacto fuera");
+            if (other.gameObject.CompareTag("Water"))
+            {
+                Debug.Log("contacto dentro");
+                m_WalkSpeed /= 2;
+                m_RunSpeed /= 2;
+            }
+        }
+
+        public void OnCollisionExit(Collision other)
+        {
+            Debug.Log("fuera fuera");
+            if (other.gameObject.CompareTag("Water"))
+            {
+                Debug.Log("fuera dentro");
+                m_WalkSpeed *= 2;
+                m_RunSpeed *= 2;
+            }
+        }
+        
     }
 }

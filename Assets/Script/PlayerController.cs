@@ -28,4 +28,24 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("SpeedX",x);
         _animator.SetFloat("SpeedY",y);
     }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("contacto fuera");
+        if (other.gameObject.CompareTag("Water"))
+        {
+            Debug.Log("contacto dentro");
+            moveSpeed /= 2;
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        Debug.Log("fuera fuera");
+        if (other.gameObject.CompareTag("Water"))
+        {
+            Debug.Log("fuera dentro");
+            moveSpeed *= 2;
+        }
+    }
 }
