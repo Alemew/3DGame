@@ -7,7 +7,7 @@ public class Botiquin : MonoBehaviour
 {
     
     public GameObject LifeAnimation;
-    private Health playerHealt;
+    private Health playerHealth;
     
     
     private void OnTriggerEnter(Collider other)
@@ -15,7 +15,7 @@ public class Botiquin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Instantiate(LifeAnimation,new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
-            playerHealt.moreLife();
+            playerHealth.moreLife();
             gameObject.SetActive(false);
             Invoke("destroyExplosion",2f);
         }
@@ -29,6 +29,6 @@ public class Botiquin : MonoBehaviour
 
     private void Awake()
     {
-        playerHealt = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
     }
 }

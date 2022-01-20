@@ -263,7 +263,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
         
-        public void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             Debug.Log("contacto fuera");
             if (other.gameObject.CompareTag("Water"))
@@ -271,10 +271,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Debug.Log("contacto dentro");
                 m_WalkSpeed /= 2;
                 m_RunSpeed /= 2;
+           
             }
         }
 
-        public void OnCollisionExit(Collision other)
+        private void OnTriggerExit(Collider other)
         {
             Debug.Log("fuera fuera");
             if (other.gameObject.CompareTag("Water"))
@@ -284,6 +285,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_RunSpeed *= 2;
             }
         }
+        
         
     }
 }
